@@ -39,7 +39,7 @@ loadConfig();
 const trs = [...document.getElementsByTagName("tr")]
   .filter((tr) => tr.children[0].tagName == "TD");
 [...document.getElementsByTagName("th")].filter((th) => {
-  th.onclick = () => {
+  th.firstElementChild.onclick = () => {
     const pos = [...th.parentNode.children].indexOf(th);
     trs.forEach((tr) => {
       tr.children[pos].classList.toggle("transparent");
