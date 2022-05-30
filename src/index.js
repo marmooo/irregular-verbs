@@ -34,18 +34,29 @@ function shuffleProblems() {
   });
 }
 
-loadConfig();
+function setHideEvent() {
+  const ths = [...document.getElementsByTagName("th")];
+  ths.forEach((th) => {
+    th.firstElementChild.onclick = () => {
+      const ths = [...th.parentNode.children];
+      const pos = ths.indexOf(th);
+      const trs = [...th.parentNode.parentNode.children];
+      trs.slice(1).forEach((tr) => {
+        tr.children[pos].classList.toggle("transparent");
+      });
+    };
+  });
+}
 
-const trs = [...document.getElementsByTagName("tr")]
-  .filter((tr) => tr.children[0].tagName == "TD");
-[...document.getElementsByTagName("th")].filter((th) => {
-  th.firstElementChild.onclick = () => {
-    const pos = [...th.parentNode.children].indexOf(th);
-    trs.forEach((tr) => {
-      tr.children[pos].classList.toggle("transparent");
-    });
-  };
-});
+function setTranslation() {
+  document.querySelectorAll("td:not(:nth-child(2))").forEach((e) => {
+    e.classList.add("notranslate");
+  });
+}
+
+loadConfig();
+setHideEvent();
+setTranslation();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("shuffleProblems").onclick = shuffleProblems;
