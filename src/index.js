@@ -14,18 +14,18 @@ function toggleDarkMode() {
   }
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+function shuffle(array) {
+  for (i = array.length; 1 < i; i--) {
+    k = Math.floor(Math.random() * i);
+    [array[k], array[i - 1]] = [array[i - 1], array[k]];
   }
+  return array;
 }
 
 function shuffleProblems() {
   const tables = [...document.getElementsByTagName("tbody")];
-  shuffleArray(trs);
+  const trs = [...document.querySelectorAll("tbody > tr")];
+  shuffle(trs);
   tables.forEach((table, n) => {
     const rows = trs.slice(n * 20, n * 20 + 20);
     for (const row of rows) {
@@ -40,8 +40,8 @@ function setHideEvent() {
     th.firstElementChild.onclick = () => {
       const ths = [...th.parentNode.children];
       const pos = ths.indexOf(th);
-      const trs = [...th.parentNode.parentNode.children];
-      trs.slice(1).forEach((tr) => {
+      const trs = [...document.querySelectorAll("tbody > tr")];
+      trs.forEach((tr) => {
         tr.children[pos].classList.toggle("transparent");
       });
     };
