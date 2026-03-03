@@ -1,9 +1,3 @@
-function loadConfig() {
-  if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.setAttribute("data-bs-theme", "dark");
-  }
-}
-
 function toggleDarkMode() {
   if (localStorage.getItem("darkMode") == 1) {
     localStorage.setItem("darkMode", 0);
@@ -54,7 +48,6 @@ function setTranslation() {
   });
 }
 
-loadConfig();
 setHideEvent();
 setTranslation();
 
